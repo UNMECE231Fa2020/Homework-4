@@ -6,7 +6,7 @@ A class will be created that will act like a container for a doubly linked list.
 
     template<class T> class List
     
-The letter `T` can change, and can be change to whatever you want. Below is an example of the private data members should look like:
+The letter `T` can change, and can be changed to whatever you want. Below is an example of the private data members should look like:
     
     template<class T> class List {
       private:
@@ -33,7 +33,7 @@ Uncomment the line `push_front(ptr->value)` after you have implemented the funct
     List()
     List(const List &x)
     
-Where `x` is a variable of your choosing. You must also implement a destructor that removes all nodes using `pop_front`.
+Where `x` is a variable of your choosing. You must also implement a destructor that removes all nodes using `pop_front` and `empty` functions.
 
     ~List()
     
@@ -46,4 +46,47 @@ Three getters need to be implemented, one what gets the first value of the list,
 You are also going to overload the `=` operator to copy the class to another class
 
     List &operator=(const List &x)
-Where `x` is a variable of your choosing.
+Where `x` is a variable of your choosing. Using `x` as the input variable, you must create a loop that iterates from `x._front` until the `nullptr`, calling `push_back` in the body of you code. Remember, `x._front` is a doubly linked list that should be moving forward, keep that in mind as you step through the loop.
+
+You'll implement two push functions:
+
+    void push_back(const T &value)
+    void push_front(const T &value)
+    
+Where `T` is your template name, which can be changed, and `value` is the value that you are adding to the `List` class (`value` can also be changed). Make sure that you consider two cases: where there is no nodes and where at least one node already exists.
+
+Next comes the pop functions:
+
+    void pop_back()
+    void pop_front()
+    
+Remember, consider two cases: when there is more than one node in your list class, and when there is only one node. 
+
+You must also implement a function to determine if the `List` class is empty:
+  
+    bool empty() const
+    
+You need to create a function that prints the contents of the `List` class. Both forwards and backwards.
+
+    void print()
+    void print_back()
+    
+Finally, two friend functions are going to be created:
+
+    template<typename V> bool operator==(const List<V> &a, const List<V> &b)
+    template<typename V> bool operator!=(const List<V> &a, const List<V> &b)
+    
+These functions should compare two `List` classes with each other to chekc if they are the same or not.
+
+This function (that is part of the class) is also required, it is given in lecture:
+
+    void reverse()
+    
+You'll be provided with a file `main.cpp` that will test your class. You must create a `.h` or `.hpp` file that will have the contents of your class.
+
+## Rubric
+    main.cpp runs with no errors: 20%
+    Creation of header file and implementation of functions: 40%
+    Inclusion of reverse(): 10%
+    Creation of Makefile: 10%
+    Clean code: 20%
