@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "TemplateList.h"
+#include "GeneralList.h"
 
 int main() {
 	List<int> IntListA;
