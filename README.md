@@ -1,5 +1,5 @@
 # Homework3
-Fourth homework of ECE 231: Intermediate Programming. Assigned 2/21/2020. Due 2/28/2020, 11:59 pm.
+Fourth homework of ECE 231: Intermediate Programming. Assigned 3/8/2020. Due 3/21/2020, 11:59 pm.
 
 ## Instructions
 A class will be created that will act like a container for a doubly linked list. However, the class will not be held down by an particular data type. This will be done with templates. The class will be called `List` and the template declaration for the class will look like this:
@@ -48,7 +48,7 @@ You are also going to overload the `=` operator to copy the class to another cla
     List &operator=(const List &x)
 Where `x` is a variable of your choosing. Using `x` as the input variable, you must create a loop that iterates from `x._front` until the `nullptr`, calling `push_back` in the body of you code. Remember, `x._front` is a doubly linked list that should be moving forward, keep that in mind as you step through the loop.
 
-You'll implement two push functions:
+You have been given these two push functions:
 
     void push_back(const T &value)
     void push_front(const T &value)
@@ -60,9 +60,9 @@ Next comes the pop functions:
     void pop_back()
     void pop_front()
     
-Remember, consider two cases: when there is more than one node in your list class, and when there is only one node. 
+Remember, consider two cases: when there is more than one node in your list class, and when there is only one node. `pop_front()` has been completed `pop_front()` must be converted from using a single linked list to a doubly linked list. 
 
-You must also implement a function to determine if the `List` class is empty:
+This function has been given to you to determine if the `List` class is empty:
   
     bool empty() const
     
@@ -77,16 +77,11 @@ Finally, two friend functions are going to be created:
     template<typename V> bool operator!=(const List<V> &a, const List<V> &b)
     
 These functions should compare two `List` classes with each other to chekc if they are the same or not.
-
-This function (that is part of the class) is also required, it is given in lecture:
-
-    void reverse()
     
-You'll be provided with a file `main.cpp` that will test your class. You must create a `.h` or `.hpp` file that will have the contents of your class.
+You'll be provided with a file `main.cpp` that will test your class, as well as `GeneralList.hpp`. You will need to finishing implementing the `List` class in `GeneralList.hpp`. Feel free to rename `GeneralList.hpp` to somthing else using the `git mv` command.
 
 ## Rubric
-    main.cpp runs with no errors: 20%
+    Executable runs with no errors: 20%
     Creation of header file and implementation of functions: 40%
-    Inclusion of reverse(): 10%
-    Creation of Makefile: 10%
+    Creation of Makefile: 20%
     Clean code: 20%
