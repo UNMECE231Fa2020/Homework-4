@@ -1,5 +1,5 @@
 # Homework3
-Fourth homework of ECE 231: Intermediate Programming. Assigned 3/8/2020. Due 3/21/2020, 11:59 pm.
+Fourth homework of ECE 231: Intermediate Programming. Assigned 3/9/2020. Due 3/21/2020, 11:59 pm.
 
 ## Instructions
 A class will be created that will act like a container for a doubly linked list. However, the class will not be held down by an particular data type. This will be done with templates. The class will be called `List` and the template declaration for the class will look like this:
