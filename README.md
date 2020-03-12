@@ -1,17 +1,17 @@
 # Homework3
-Fourth homework of ECE 231: Intermediate Programming. Assigned 3/9/2020. Due 3/21/2020, 11:59 pm.
+Fourth homework of ECE 231: Intermediate Programming. Assigned 3/9/2020. Due 3/14/2020, 11:59 pm.
 
 ## Instructions
 A class will be created that will act like a container for a doubly linked list. However, the class will not be held down by an particular data type. This will be done with templates. The class will be called `List` and the template declaration for the class will look like this:
 
-    template<class T> class List
+    template<class Data> class List
     
-The letter `T` can change, and can be changed to whatever you want. Below is an example of the private data members should look like:
+The letter `Data` can change, and can be changed to whatever you want. Below is an example of the private data members should look like:
     
-    template<class T> class List {
+    template<class Data> class List {
       private:
       struct _list {
-        T value;
+        Data value;
         struct _list *next;
         struct _list *prev;
       };
@@ -24,16 +24,16 @@ The letter `T` can change, and can be changed to whatever you want. Below is an 
       void reccopy(const Dlist *ptr) {
         if(ptr) {
           reccopy(ptr->next);
-          //push_front(ptr->value);
+          push_front(ptr->value);
         }
       }
       
-Uncomment the line `push_front(ptr->value)` after you have implemented the function `push_front`. Additionally, you can change `T`, `_list`, `Dlist`, and `ptr` to whatever you want, just make sure to stay consistent. You are going to implement two constructors, a default constructor, and a copy constructor. The copy constructor should call `reccopy`.
+Uncomment the line `push_front(ptr->value)` after you have implemented the function `push_front`. You have been given two constructors, a default constructor, and a copy constructor. The copy constructor should call `reccopy`.
 
     List()
-    List(const List &x)
+    List(const List &list)
     
-Where `x` is a variable of your choosing. You must also implement a destructor that removes all nodes using `pop_front` and `empty` functions.
+Where `list` is another `List` class. You must also implement a destructor that removes all nodes using `pop_front` and `empty` functions.
 
     ~List()
     
@@ -50,10 +50,10 @@ Where `x` is a variable of your choosing. Using `x` as the input variable, you m
 
 You have been given these two push functions:
 
-    void push_back(const T &value)
-    void push_front(const T &value)
+    void push_back(const Data &value)
+    void push_front(const Data &value)
     
-Where `T` is your template name, which can be changed, and `value` is the value that you are adding to the `List` class (`value` can also be changed). Make sure that you consider two cases: where there is no nodes and where at least one node already exists.
+Where `Data` is your template name, and `value` is the value that you are adding to the `List` class (`value` can be changed). Make sure that you consider two cases: where there is no nodes and where at least one node already exists.
 
 Next comes the pop functions:
 
@@ -73,15 +73,15 @@ You need to create a function that prints the contents of the `List` class. Both
     
 Finally, two friend functions are going to be created:
 
-    template<typename V> bool operator==(const List<V> &a, const List<V> &b)
-    template<typename V> bool operator!=(const List<V> &a, const List<V> &b)
+    template<typename V> friend bool operator==(const List<V> &a, const List<V> &b)
+    template<typename V> friend bool operator!=(const List<V> &a, const List<V> &b)
     
-These functions should compare two `List` classes with each other to chekc if they are the same or not.
+These functions should compare two `List` classes with each other to check if they are the same or not (hint: use a for loop).
     
 You'll be provided with a file `main.cpp` that will test your class, as well as `GeneralList.hpp`. You will need to finishing implementing the `List` class in `GeneralList.hpp`. Feel free to rename `GeneralList.hpp` to somthing else using the `git mv` command.
 
 ## Rubric
     Executable runs with no errors: 20%
-    Creation of header file and implementation of functions: 40%
+    Implementation of functions in GeneralList.hpp: 40%
     Creation of Makefile: 20%
     Clean code: 20%
