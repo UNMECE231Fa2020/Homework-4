@@ -7,7 +7,6 @@ int main() {
 	IntListA.push_back(2);
 	IntListA.push_front(4);
 	IntListA.print();
-	IntListA.print_back();
 
 	std::cout << std::endl;
 
