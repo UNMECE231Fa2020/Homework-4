@@ -1,10 +1,10 @@
 #include <iostream>
 
-template <class Data>
+template <class T>
 class List {
 	private:
 		struct _list {
-			Data value;
+			T value;
 			struct _list *next;
 			struct _list *prev;
 		};
@@ -15,22 +15,19 @@ class List {
 		Dlist *_back;
 
 		void reccopy(const Dlist *ptr) {
-			if(ptr) { // if(ptr != nullptr) {
+			if(ptr) { 
+			// We can also use:
+			// if(ptr != nullptr) {
 				reccopy(ptr->next);
 				push_front(ptr->value);
 			}
 		}
 	public:
-		List() {
-			_size = 0;
-			_front = nullptr;
-			_back = nullptr;
+		List() : _size{0}, _front{nullptr}, _back{nullptr} {
+			
 		}
 
-		List(const List &list) {
-			_front=nullptr;
-			_back=nullptr;
-			_size=0;
+		List(const List &list) : _size{0}, _front{nullptr}, _back{nullptr} {
 			reccopy(list._front);
 		}
 
@@ -41,11 +38,11 @@ class List {
 			}
 		}
 
-		Data &front() const {
+		T front() const {
 			return _front->value;
 		}
 
-		Data &back() const {
+		T back() const {
 			return _back->value;
 		}
 
@@ -57,25 +54,22 @@ class List {
 			return _size;
 		}
 
-		void push_front(Data data) {
+		void push_front(T data) {
 			Dlist *newNode = new Dlist;
 			newNode->value = data;
-			newNode->prev = nullptr;
 
 			if(_front==nullptr) {
 				newNode->next=nullptr;
-				_back=newNode;
 			}
 			else {
 				newNode->next=_front;
-				_front->prev = newNode;
 			}
 
 			_front=newNode;
 			_size++;
 		}
 
-		void push_back(Data data) {
+		void push_back(T data) {
 			Dlist *newNode = new Dlist;
 			newNode->value = data;
 			newNode->next=nullptr;
