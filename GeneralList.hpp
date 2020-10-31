@@ -1,10 +1,10 @@
 #include <iostream>
 
-template <class T>
+template <typename X>
 class List {
 	private:
 		struct _list {
-			T value;
+			X value;
 			struct _list *next;
 			struct _list *prev;
 		};
@@ -14,127 +14,108 @@ class List {
 		Dlist *_front;
 		Dlist *_back;
 
-		void reccopy(const Dlist *ptr) {
-			if(ptr) { 
-			// We can also use:
-			// if(ptr != nullptr) {
-				reccopy(ptr->next);
-				push_front(ptr->value);
+		void reccopy(Dlist *node) {
+			if (node != nullptr) {
+				reccopy(node->next);
+				add_front(node->value);
 			}
 		}
+
 	public:
-		List() : _size{0}, _front{nullptr}, _back{nullptr} {
-			
+		List() : _size{0}, _front{nullptr}, _back{nullptr} { }
+		List(const List &l) : _size{0}, _front{nullptr}, _back{nullptr} {
+			reccopy(l._front);
 		}
-
-		List(const List &list) : _size{0}, _front{nullptr}, _back{nullptr} {
-			reccopy(list._front);
-		}
-
 		~List() {
-			while(!empty()) {
-			//while(_size > 0) {
-				pop_front();
+			while (!empty()) {
+				rm_front();
 			}
-		}
-
-		T front() const {
-			return _front->value;
-		}
-
-		T back() const {
-			return _back->value;
 		}
 
 		size_t size() const {
 			return _size;
 		}
 
-		size_t length() const {
-			return _size;
+		X &front() {
+			return _front->value;
 		}
 
-		void push_front(T data) {
-			Dlist *newNode = new Dlist;
-			newNode->value = data;
+		X &back() {
+			return _back->value;
+		}
 
-			if(_front==nullptr) {
-				newNode->next=nullptr;
+		/* Edit the class from here to the bottom of the file */
+
+		void add_front(X data) {
+			Slist *newNode = new Slist;
+			newNode->value = data;
+			if (_front == nullptr) {
+				newNode->next = nullptr;
+				_back = newNode;
 			}
 			else {
-				newNode->next=_front;
+				newNode->next = _front;
 			}
-
-			_front=newNode;
-			_size++;
+			_front = newNode;
+			_size += 1;
 		}
 
-		void push_back(T data) {
-			Dlist *newNode = new Dlist;
+		void add_back(X data) {
+			Slist *newNode = new Slist;
 			newNode->value = data;
-			newNode->next=nullptr;
-
-			if(_back!=nullptr) {
-				_back->next=newNode;
-				newNode->prev = _back;
+			if (_back != nullptr) {
+				_back->next = newNode;
+			}
+			if (_front == nullptr) {
+				_front = newNode;
 			}
 
-			if(_front==nullptr) {
-				_front=newNode;
-				newNode->prev = nullptr;
-			}
-
-			_back=newNode;
-			_size+=1;
+			_back = newNode;
+			_size += 1;
 		}
 
-		void pop_front() {
-			Dlist *front_to_delete = _front;
+		void rm_front() {
+			Slist *node_to_delete = _front;
 			_front = _front->next;
 
-			if(_front==nullptr) {
-				_back = nullptr;
-			}
-			else {
-				_front->prev = nullptr;
+			if (_front != nullptr) {
+				if (_front->next == nullptr) {
+					_back = nullptr;
+				}
 			}
 
-			delete front_to_delete;
+			delete node_to_delete;
 			_size -= 1;
 		}
 
-		//CONVERT THIS FUNCTION
-		void pop_back() {
-			Llist *back_to_remove = _back;
-
-			if(_front->next!=nullptr) {
-				Llist *new_back = _front;
-				while(new_back->next!=_back) {
-					new_back=new_back->next;
+		void rm_back() {
+			Slist *node_to_delete = _front;
+			if (_front->next != nullptr) {
+				Slist *new_back = _front;
+				while (new_back->next != _back) {
+					new_back = new_back->next;
 				}
-				new_back->next=nullptr;
-				_back=new_back;
+				new_back->next = nullptr;
+				_back = new_back;
 			}
 			else {
-				_front=nullptr;
-				_back=nullptr;
+				_front = nullptr;
+				_back = nullptr;
 			}
 
-			delete back_to_remove;
-			_size-=1;
+			delete node_to_delete;
+			_size -= 1;
 		}
 
-		// leave this alone
 		bool empty() const {
-			return ((_front==nullptr) && (_back==nullptr));
+			return ((_front == nullptr) && (_back == nullptr));
 		}
 
-		//Modify this
 		void print() {
-			Llist *temp;
-			for(temp=_front; temp!=nullptr; temp=temp->next) {
-				std::cout << temp->value << " ";
+			Slist *temp;
+			for (temp = _front; temp != nullptr; temp = temp->next) {
+				std::cout << temp->value << ' ';
 			}
-			std::cout << std::endl;
+			std::cout << '\n';
 		}
 };
